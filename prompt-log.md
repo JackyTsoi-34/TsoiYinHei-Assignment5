@@ -2,7 +2,7 @@
 
 ## Assignment Overview
 Mini-Assignment 5: Dashboard Development
-Objective: Create a simple Streamlit dashboard that provides a user interface for interacting with an AI agent.
+Objective: Create a simple Streamlit dashboard that provides a user interface for interacting with an AI agent (using DeepSeek API).
 Due: 11:59 PM on due date (Late penalty: 20% deduction per day, max 2 days late)
 
 ---
@@ -51,17 +51,18 @@ Due: 11:59 PM on due date (Late penalty: 20% deduction per day, max 2 days late)
 ### 3. Implementation Planning
 
 **Architecture Decision:**
-- Use OpenAI API for LLM functionality (gpt-3.5-turbo, gpt-4 options)
+- Use DeepSeek API (OpenAI-compatible) for LLM functionality (deepseek-chat model)
+- Support both official DeepSeek API and third-party proxies through configuration
 - Build `AIAgent` class in agent.py for reusability
 - Create interactive Streamlit dashboard with sidebar configuration
 - Use python-dotenv for secure API key management
 
 **Component Breakdown:**
 1. **agent.py** - AIAgent class with:
-   - API initialization
+   - DeepSeek API initialization with configurable base URL
    - Message processing with conversation history
    - Error handling
-   - Temperature/model configuration
+   - Temperature configuration
 
 2. **app.py** - Streamlit dashboard with:
    - Sidebar: Configuration panel (model selection, temperature slider, initialize button)
@@ -70,9 +71,9 @@ Due: 11:59 PM on due date (Late penalty: 20% deduction per day, max 2 days late)
    - Styling: Custom CSS for professional appearance
 
 3. **Supporting Files**:
-   - requirements.txt: streamlit, openai, python-dotenv
-   - .env.example: Template for API key configuration
-   - README.md: Complete documentation with setup instructions
+   - requirements.txt: streamlit, openai (for OpenAI-compatible client), python-dotenv
+   - .env.example: Template for API key configuration with options for official API and proxies
+   - README.md: Complete documentation with DeepSeek-specific setup instructions
 
 ---
 
@@ -80,10 +81,11 @@ Due: 11:59 PM on due date (Late penalty: 20% deduction per day, max 2 days late)
 
 #### agent.py Features:
 - `AIAgent` class with constructor for model/temperature configuration
+- Configurable `api_base` URL to support both official DeepSeek API and third-party proxies
 - `process()` method that:
   - Validates user input
   - Maintains conversation history
-  - Calls OpenAI API with system prompt
+  - Calls DeepSeek API (using OpenAI-compatible format)
   - Handles errors gracefully
   - Returns response string
 - `reset_conversation()` to clear history
@@ -94,7 +96,7 @@ Due: 11:59 PM on due date (Late penalty: 20% deduction per day, max 2 days late)
 - Page configuration: "wide" layout with proper title
 - Session state management for agent persistence
 - Sidebar controls:
-  - Model selector (gpt-3.5-turbo, gpt-4)
+  - Model selector (deepseek-chat)
   - Temperature slider (0.0-2.0)
   - Initialize Agent button
   - Clear History button
@@ -193,13 +195,15 @@ A5/
 - Session state management
 
 **openai==1.3.9**
-- Official OpenAI Python client
+- OpenAI-compatible Python client
+- Works with DeepSeek's OpenAI-compatible API
+- Supports custom base URLs for proxies
 - Handles chat completion API calls
-- Built-in error handling
 
 **python-dotenv==1.0.0**
 - Loads environment variables from .env file
-- Keeps API keys out of source code
+- Keeps API keys and configuration out of source code
+- Enables easy switching between official API and proxy endpoints
 
 ---
 
@@ -272,7 +276,8 @@ A5/
 ## Summary
 
 Successfully created a complete Streamlit dashboard application featuring:
-- LLM-based AI agent using OpenAI API
+- LLM-based AI agent using DeepSeek API (OpenAI-compatible format)
+- Support for both official DeepSeek API and third-party proxies
 - Interactive sidebar configuration (model, temperature)
 - User input handling with validation
 - Real-time response processing with loading feedback
@@ -281,5 +286,11 @@ Successfully created a complete Streamlit dashboard application featuring:
 - Professional UI with custom styling
 - Complete documentation
 - Secure API key management via .env
+
+**Key DeepSeek Integration Features:**
+- Uses OpenAI Python client with custom base URL pointing to DeepSeek API
+- Configurable API endpoints for flexibility with proxies
+- Responds in Chinese (native DeepSeek behavior)
+- Works seamlessly with the OpenAI-compatible API format
 
 The application is production-ready and meets all assignment requirements.

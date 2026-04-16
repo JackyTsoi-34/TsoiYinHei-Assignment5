@@ -8,12 +8,12 @@
 1. User configures agent settings (model, temperature) in the sidebar
 2. User initializes the agent with the "Initialize Agent" button
 3. User enters a query in the main text area
-4. Agent processes the query using OpenAI's API
+4. Agent processes the query using DeepSeek's API
 5. Response is displayed in the dashboard and added to conversation history
 6. User can continue the conversation or clear history as needed
 
 **Key Components:**
-- **agent.py**: LLM-based agent module that handles API calls to OpenAI
+- **agent.py**: LLM-based agent module that handles API calls to DeepSeek
 - **app.py**: Streamlit dashboard application with UI components
 - **requirements.txt**: Python package dependencies
 - **.env**: Environment variables (API key storage)
@@ -22,7 +22,7 @@
 
 ### Prerequisites
 - Python 3.8 or higher
-- OpenAI API key (from https://platform.openai.com/api-keys)
+- DeepSeek API key (from https://platform.deepseek.com/api-keys)
 
 ### Setup Steps
 
@@ -43,10 +43,13 @@
 
 4. **Configure API key**:
    - Copy `.env.example` to `.env`
-   - Open `.env` and add your OpenAI API key:
+   - Open `.env` and add your DeepSeek API key:
      ```
-     OPENAI_API_KEY=sk-your-actual-key-here
+     DEEPSEEK_API_KEY=sk-your-actual-key-here
+     DEEPSEEK_API_BASE=https://api.deepseek.com/v1
+     DEEPSEEK_MODEL=deepseek-chat
      ```
+   - If using a third-party proxy, update `DEEPSEEK_API_BASE` with the proxy URL
 
 5. **Run the Streamlit app**:
    ```bash
@@ -63,7 +66,7 @@
 - Professional styling with custom CSS
 
 ✅ **Sidebar Configuration**
-- Model selection (gpt-3.5-turbo, gpt-4)
+- Model selection (deepseek-chat)
 - Temperature slider (0.0-2.0) with help text
 - Agent initialization button
 - Conversation history management (clear button)
@@ -76,7 +79,7 @@
 - Placeholder text for guidance
 
 ✅ **Agent Integration**
-- LLM-based agent using OpenAI's chat API
+- LLM-based agent using DeepSeek's chat API
 - Configurable model and temperature
 - Conversation history tracking
 - Error handling for API issues
